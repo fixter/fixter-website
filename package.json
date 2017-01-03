@@ -1,0 +1,13 @@
+{
+  "name": "fixter-website",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Fixter",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "wipeDB": "docker-compose down && docker volume rm fixter-website_fixter-keystone-data",
+    "build": "gulp sass browser_js",
+    "watch": "gulp"
+  }
+}
