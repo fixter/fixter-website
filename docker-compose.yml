@@ -17,4 +17,4 @@ services:
     command: npm run dev
 
 volumes:
-  keystone-data:
+  fixter-keystone-data:

@@ -10,9 +10,20 @@ const babel = require('gulp-babel');
 const browser_js_path = './static/js/app.js';
 const server_paths = ['./server.js', './middleware/**/*.js'];
 
-const sass_paths = require('bourbon').includePaths.concat(require('bourbon-neat').includePaths);
+const sass_paths = [
+  'node_modules/materialize-css/sass'
+]
 
-//might have to rework this one with bourbon.io
+gulp.task('materialize', function () {
+    gulp.src('node_modules/materialize-css/dist/js/materialize.min.js')
+        .pipe(gulp.dest('static/bin'));
+    gulp.src('node_modules/jquery/dist/jquery.min.js')
+        .pipe(gulp.dest('static/bin'));
+    gulp.src('./node_modules/materialize-css/dist/fonts/**', {
+      base: './node_modules/materialize-css/dist/
+    }).pipe(gulp.dest('static/bin'));
+});
+
 gulp.task('sass', function(){
     return gulp.src('static/scss/app.scss')
         .pipe(plugins.sass({
@@ -29,7 +40,7 @@ gulp.task('sass', function(){
 gulp.task('browser_js', function(){
     browserify(browser_js_path)
         .transform(babelify, {
-            "presets": ["es2015", "stage-2", "react"]
+            "presets": ["es2015", "stage-2"]
         })
         .bundle().on('error', function (error) {
             console.log(error.toString());
@@ -72,4 +83,4 @@ gulp.task('watch', function(){
     //gulp.watch(['!static/img/*'], ['img']);
 });
 
-gulp.task('default', ['watch', 'sass', 'browser_js']);
+gulp.task('default', ['watch', 'sass', 'browser_js', 'materialize']);

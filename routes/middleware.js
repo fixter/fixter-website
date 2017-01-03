@@ -39,17 +39,17 @@ exports.initErrorHandlers = function(req, res, next) {
 }
 
 
-exports.flashMessages = function(req, res, next) {
-
-    const flashMessages = {
-        info: req.flash('info'),
-        success: req.flash('success'),
-        warning: req.flash('warning'),
-        error: req.flash('error')
-    };
-
-		res.locals.messages = flashMessages.some((msgs) => {return msgs.length}); ? flashMessages : false;
-
-    next();
-
-};
+// exports.flashMessages = function(req, res, next) {
+//
+//     const flashMessages = {
+//         info: req.flash('info'),
+//         success: req.flash('success'),
+//         warning: req.flash('warning'),
+//         error: req.flash('error')
+//     };
+//
+// 		res.locals.messages = flashMessages.some((msgs) => {return msgs.length}); ? flashMessages : false;
+//
+//     next();
+//
+// };

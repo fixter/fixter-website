@@ -1,13 +1,17 @@
 const keystone = require('keystone');
+const cons = require('consolidate');
+const nunjucks = require('nunjucks');
+
 keystone.init({
 
   'name': 'My Project',
 
-  'favicon': 'static/favicon.ico',
-  'static': ['static'],
 
-  'views': 'templates/views',
-  'view engine': 'nunjucks',
+  'static': 'static/bin',
+
+  'views': ['templates/views', 'templates'],
+  'view engine': 'html',
+  'custom engine': cons.nunjucks,
 
   'auto update': true,
   'mongo': process.env.MONGO_URI || "mongodb://mongodb:27017/dev",
@@ -19,7 +23,7 @@ keystone.init({
 
 });
 
-require('./models');
+keystone.import('models');
 
 keystone.set('routes', require('./routes'));
 

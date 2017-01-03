@@ -3,6 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <title>Fixter</title
+  <title>Fixter</title>
+  <link href="app.css" rel="stylesheet">
+  {% if user and user.canAccessKeystone %}
+  <link href="/keystone/styles/content/editor.min.css" rel=stylesheet>
+  {% endif %}
+
+  {% block head %}
+  {% endblock %}
+  {% block css %}
+  {% endblock %}
 </head>
+<body>
+  <div>Hello World</div>
+  {% block content %}
+  {% endblock %}
+  <script src="jquery.min.js"></script>
+  <script src="materialize.min.js"></script>
+  <script src="bundle.js"></script>
+  {% block js %}
+  {% endblock %}
+</body>
 </html>
