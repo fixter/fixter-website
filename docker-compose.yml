@@ -12,6 +12,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/src
+      - /src/node_modules
     depends_on:
       - mongodb
     command: npm run dev
