@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 // Fixter SCSS files.
+@import "base.scss";
 @import "index.scss";
+@import "nav.scss";
+@import "progress.scss";
 
 // Mixins
 // @import "components/prefixer";

@@ -20,7 +20,7 @@ gulp.task('materialize', function () {
     gulp.src('node_modules/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('static/bin'));
     gulp.src('./node_modules/materialize-css/dist/fonts/**', {
-      base: './node_modules/materialize-css/dist/
+      base: './node_modules/materialize-css/dist/'
     }).pipe(gulp.dest('static/bin'));
 });
 
