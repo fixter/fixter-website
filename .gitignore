@@ -1,7 +1,7 @@
 # Logs
 logs
 *.log
-
+!updates
 # Runtime data
 pids
 *.pid
