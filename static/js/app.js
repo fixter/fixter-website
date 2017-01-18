@@ -126,5 +126,4 @@ $(document).on('scroll', function(){
     //   document.styleSheets[0].addRule('.semantic::-moz-progress-bar', 'background-color: green');
     // }
 });
-
 });
