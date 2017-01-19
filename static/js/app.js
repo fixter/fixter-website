@@ -1,75 +1,63 @@
-// This file does some app initalization and imports files.
-  $(document).ready(function(){
-    $('.scrollspy').scrollSpy();
-  });
+// <----------------- This is for the scrollspy function ----------------->
+$(document).ready(function(){
+  $('.scrollspy').scrollSpy();
+});
+// <----------------- End the scrollspy function ----------------->
 
-  $(document).ready(function(){
 
-  var getMax = function(){
-      return $(document).height() - $(window).height();
-  }
+// <----------------- This is for the progressbar ----------------->
+$(document).ready(function(){
 
-  var getValue = function(){
-      return $(window).scrollTop();
-  }
+var getMax = function(){
+    return $(document).height() - $(window).height();
+}
 
-  if('max' in document.createElement('progress')){
-      // Browser supports progress element
-      var progressBar = $('progress');
+var getValue = function(){
+    return $(window).scrollTop();
+}
 
-      // Set the Max attr for the first time
-      progressBar.attr({ max: getMax() });
+if('max' in document.createElement('progress')){
+    // Browser supports progress element
+    var progressBar = $('progress');
 
-      $(document).on('scroll', function(){
-          // On scroll only Value attr needs to be calculated
-          progressBar.attr({ value: getValue() });
-      });
+    // Set the Max attr for the first time
+    progressBar.attr({ max: getMax() });
 
-      $(window).resize(function(){
-          // On resize, both Max/Value attr needs to be calculated
-          progressBar.attr({ max: getMax(), value: getValue() });
-      });
-  }
-  else {
-      var progressBar = $('.progress-bar'),
-          max = getMax(),
-          value, width;
+    $(document).on('scroll', function(){
+        // On scroll only Value attr needs to be calculated
+        progressBar.attr({ value: getValue() });
+    });
 
-      var getWidth = function(){
-          // Calculate width in percentage
-          value = getValue();
-          width = (value/max) * 100;
-          width = width + '%';
-          return width;
-      }
+    $(window).resize(function(){
+        // On resize, both Max/Value attr needs to be calculated
+        progressBar.attr({ max: getMax(), value: getValue() });
+    });
+}
+else {
+    var progressBar = $('.progress-bar'),
+        max = getMax(),
+        value, width;
 
-      var setWidth = function(){
-          progressBar.css({ width: getWidth() });
-      }
+    var getWidth = function(){
+        // Calculate width in percentage
+        value = getValue();
+        width = (value/max) * 100;
+        width = width + '%';
+        return width;
+    }
 
-      $(document).on('scroll', setWidth);
-      $(window).on('resize', function(){
-          // Need to reset the Max attr
-          max = getMax();
-          setWidth();
-      });
+    var setWidth = function(){
+        progressBar.css({ width: getWidth() });
+    }
+
+    $(document).on('scroll', setWidth);
+    $(window).on('resize', function(){
+        // Need to reset the Max attr
+        max = getMax();
+        setWidth();
+    });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(function(){
 
 $('#flat').addClass("active");
@@ -103,7 +91,6 @@ $('#semantic').on('click', function(){
   $(this).preventDefault();
   alert('hello');
 });
-
 $(document).on('scroll', function(){
 
     var maxAttr = $('#progressBar').attr('max');
@@ -125,5 +112,6 @@ $(document).on('scroll', function(){
     //   document.styleSheets[0].addRule('.semantic::-webkit-progress-value', 'background-color: green');
     //   document.styleSheets[0].addRule('.semantic::-moz-progress-bar', 'background-color: green');
     // }
+  });
 });
-});
+// <----------------- End progress bar ----------------->
