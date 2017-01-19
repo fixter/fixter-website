@@ -23,13 +23,13 @@
   {% endblock %}
 </head>
 <body>
-
+  {% include "_progress-bar.html" %}
   {% block content %}
   {% endblock %}
   <script src="jquery.min.js"></script>
   <script src="materialize.min.js"></script>
   <script src="bundle.js"></script>
-  
+
   {% block js %}
   {% endblock %}
 </body>

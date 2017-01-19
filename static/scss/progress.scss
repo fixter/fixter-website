@@ -3,6 +3,9 @@ progress {
   position: fixed;
   left: 0;
   top: 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1000;
 
   /* Dimensions */
   width: 100%;
@@ -20,7 +23,7 @@ progress {
   background-color: transparent;
 
   /* For IE10+, color of the progress bar */
-  color: red;
+  color: darken($offwhite, 10);
 }
 
 progress::-webkit-progress-bar {
@@ -28,21 +31,21 @@ progress::-webkit-progress-bar {
 }
 
 .flat::-webkit-progress-value {
-  background-color: $salmon;
+  background-color: darken($offwhite, 10);
 }
 
 .flat::-moz-progress-bar {
-  background-color: $salmon;
+  background-color: darken($offwhite, 10);
 }
 
 .single::-webkit-progress-value {
   background-color: transparent;
-  background-image: -webkit-linear-gradient(left, transparent, $salmon);
+  background-image: -webkit-linear-gradient(left, transparent, darken($offwhite, 10));
 }
 
 .single::-moz-progress-bar {
   background-color: transparent;
-  background-image: -moz-linear-gradient(left, transparent, $salmon);
+  background-image: -moz-linear-gradient(left, transparent, darken($offwhite, 10));
 }
 
 .progress-container {
