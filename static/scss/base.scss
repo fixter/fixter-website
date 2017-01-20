@@ -27,7 +27,7 @@
     font-style: normal;
 }
 body,a,li,ul,ol,label,input,select,span {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
 $dark-blue: #2C3E50;
@@ -42,11 +42,17 @@ body{
 }
 
 p{
+  font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   font-weight: 200;
 }
 
-h1, h2, h3, h4, h5{
+h3{
+  font-family: 'Playfair Display', serif;
+  font-weight: 700 !important;
+}
+
+h1, h2, h4, h5{
   font-family: 'cooper_hewittheavy', sans-serif;
 }
 

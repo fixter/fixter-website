@@ -179,3 +179,52 @@ window.onscroll = function(){
 };
 
 // <----------------- End scroll skew ----------------->
+
+
+// <----------------- Begin hide header ----------------->
+
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var deltaHeader = 5;
+var navbarHeight = $('header').outerHeight();
+console.log(navbarHeight);
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = window.scrollY;
+    console.log(st);
+
+
+    // Make sure they scroll more than deltaHeader
+    if(Math.abs(lastScrollTop - st) <= deltaHeader)
+        return;
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        console.log(didScroll);
+
+        $('header').removeClass('nav-down').addClass('nav-up');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('header').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+
+    lastScrollTop = st;
+}
+
+// <----------------- End hide header ----------------->
