@@ -1,11 +1,14 @@
 // <----------------- This is for the scrollspy function ----------------->
+
 $(document).ready(function(){
   $('.scrollspy').scrollSpy();
 });
+
 // <----------------- End the scrollspy function ----------------->
 
 
 // <----------------- This is for the progressbar ----------------->
+
 $(document).ready(function(){
 
 var getMax = function(){
@@ -114,4 +117,65 @@ $(document).on('scroll', function(){
     // }
   });
 });
+
 // <----------------- End progress bar ----------------->
+
+
+// <----------------- Begin scroll skew ----------------->
+
+// Global Variables
+var currentDelta = 0; // The global value for the previous delta
+var deltaLimit = 80; // Set the limit of the skew here
+var returnSpeed = 1.08; // Sets the speed of return
+
+// Calculates scroll speed
+var checkScrollSpeed = (function(settings){
+    settings = settings || {};
+	var lastPos, newPos, timer, delta,
+		delay = settings.delay || 20;
+	function clear() {
+		lastPos = null;
+		delta = 0;
+	}
+	clear();
+	return function(){
+		newPos = window.scrollY;
+		if ( lastPos != null ){ // && newPos < maxScroll
+			delta = newPos -  lastPos;
+		}
+		lastPos = newPos;
+		clearTimeout(timer);
+		timer = setTimeout(clear, delay);
+		updateRate(delta);
+		return delta;
+	};
+  // This function updates the rate with the highest absolute rate
+  // with respect to negative and positive values.
+  // The final result is modded by the limit to cap the max value.
+	function updateRate(deltaValue){
+		if (Math.abs(deltaValue) > Math.abs(currentDelta)){
+		  	currentDelta = (delta) % deltaLimit;
+		}
+	}
+})();
+
+// This is the decay rate of the skew
+window.setInterval(function(){
+	currentDelta = (currentDelta/returnSpeed).toFixed(5); // "toFixed" rounds to 5 significant digits
+	updateSkew();
+}, 10);
+
+// Updates the skew value of the object with the decay rate.
+function updateSkew(){
+	var $changeSkew = 'skewY('+(currentDelta/20).toFixed(5)+'deg)';
+	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+	var $change = $changeSkew + ' ' + $changeTransform
+	$(".scrollSkew").css('transform', $change);
+}
+
+// listen to "scroll" event to trigger effect
+window.onscroll = function(){
+  checkScrollSpeed();
+};
+
+// <----------------- End scroll skew ----------------->

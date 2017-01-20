@@ -12,6 +12,7 @@
   <title>Fixter</title>
   <link href="app.css" rel="stylesheet">
   <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   {% if user and user.canAccessKeystone %}
   <link href="/keystone/styles/content/editor.min.css" rel=stylesheet>
@@ -24,13 +25,16 @@
 </head>
 <body>
   {% include "_progress-bar.html" %}
-  {% block content %}
-  {% endblock %}
-  <script src="jquery.min.js"></script>
-  <script src="materialize.min.js"></script>
-  <script src="bundle.js"></script>
+  <!-- {% include "_index-header.html" %} -->
+  <div class ="scrollSkew">
+    {% block content %}
+    {% endblock %}
+    <script src="jquery.min.js"></script>
+    <script src="materialize.min.js"></script>
+    <script src="bundle.js"></script>
 
-  {% block js %}
-  {% endblock %}
+    {% block js %}
+    {% endblock %}
+  </div>
 </body>
 </html>

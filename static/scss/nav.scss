@@ -3,7 +3,8 @@ header{
   top: 0;
   left: 0;
   width: 100%;
-  background: $offwhite;;
+  background-color: $offwhite;
+  z-index: 1;
   ul{
     display: table;
     table-layout: fixed;
