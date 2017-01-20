@@ -2,7 +2,9 @@
   min-height: 100vh;
 }
 .content{
-  background-color: $dark-blue;
+  background-color: $charcoal;
   color: $offwhite;
-  box-shadow: 0px 0px 15px 5px rgba(0,0,0,.4);
+  // box-shadow: 0px 0px 15px 5px rgba(0,0,0,.4);
+  margin: -1px; // This is to help with the scrollSkew line bug that creates a line
+  padding: 0px 10%;
 }

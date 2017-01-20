@@ -26,7 +26,7 @@
     font-weight: normal;
     font-style: normal;
 }
-body,a,h2,h3,h4,h5,h6,li,ul,ol,label,input,select,span {
+body,a,li,ul,ol,label,input,select,span {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -35,6 +35,7 @@ $salmon: #E74C3C;
 $offwhite: #ECF0F1;
 $light-blue: #3498DB;
 $mid-blue: #2980B9;
+$charcoal: #2F3436;
 
 body{
   background-color: $offwhite;
@@ -42,6 +43,11 @@ body{
 
 p{
   font-size: 1.3rem;
+  font-weight: 200;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'cooper_hewittheavy', sans-serif;
 }
 
 .huge{
