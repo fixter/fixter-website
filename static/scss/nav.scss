@@ -3,22 +3,25 @@ header{
   top: 0px;
   width: 100%;
   background-color: $offwhite;
-  z-index: 1;
+  z-index: 1000;
   transition: top 0.2s ease-in-out;
+  nav{
+    background-color: $charcoal;
+    box-shadow: 0 0 0;
+    border-bottom: 1px solid darken($offwhite, 20);
+  }
   ul{
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    margin: 0;
     li{
-      text-align: center;
-      display: table-cell;
-      font-size: 1.5rem;
       a{
+        font-family: 'cooper_hewittheavy', sans-serif;
+        letter-spacing: .1rem;
+        padding: 0 30px;
+        font-size: 1.2rem;
+        color: $offwhite;
       }
     }
   }
 }
 .nav-up {
-  top: -40px !important; // same as header height. use variables in LESS/SASS
+  top: -65px !important; // same as header height. use variables in LESS/SASS
 }

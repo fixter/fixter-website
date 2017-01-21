@@ -39,6 +39,7 @@ $charcoal: #2F3436;
 
 body{
   background-color: $offwhite;
+  overflow-x: hidden;
 }
 
 p{
@@ -58,6 +59,7 @@ h1, h2, h4, h5{
 
 .huge{
   font-family: 'cooper_hewittheavy', sans-serif;
-  font-size: 8rem;
-  letter-spacing: .2rem;
+  font-size: 9rem;
+  letter-spacing: .4rem;
+  margin: 0;
 }

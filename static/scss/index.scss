@@ -1,10 +1,42 @@
 .index {
   min-height: 100vh;
 }
+.grad{
+  background: $offwhite; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(darken($offwhite, 20), $offwhite); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(darken($offwhite, 20), $offwhite); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(darken($offwhite, 20), $offwhite); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(darken($offwhite, 20), $offwhite); /* Standard syntax */
+}
+.gradInv{
+  background: $offwhite; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient($offwhite, darken($offwhite, 40)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($offwhite, darken($offwhite, 40)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($offwhite, darken($offwhite, 40)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($offwhite, darken($offwhite, 40)); /* Standard syntax */
+}
 .content{
   background-color: $charcoal;
   color: $offwhite;
-  // box-shadow: 0px 0px 15px 5px rgba(0,0,0,.4);
+  // box-shadow: 0px 0px 25px 15px rgba(0,0,0,.2);
   margin: -1px; // This is to help with the scrollSkew line bug that creates a line
   padding: 0px 10%;
+  // margin: 5%;
+  // border-radius: 0px 20px;
+}
+.card-row{
+  .card-wrap{
+    padding: 5%;
+    margin-top: 40px;
+    .carded{
+      background-color: $offwhite !important;
+      color: $charcoal !important;
+      box-shadow: 0px 0px 15px 10px rgba(0,0,0,.1);
+      padding: 30px;
+      border-radius: 3px;
+      p{
+        margin: 0;
+      }
+    }
+  }
 }

@@ -1,8 +1,12 @@
 // <----------------- This is for the scrollspy function ----------------->
 
 $(document).ready(function(){
-  $('.scrollspy').scrollSpy();
+  $('.scrollspy').scrollSpy({
+    scrollOffset: 0
+  });
 });
+
+$(".button-collapse").sideNav();
 
 // <----------------- End the scrollspy function ----------------->
 
@@ -226,5 +230,12 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
+
+// Show when scrolled to bottom of page
+$(window).scroll(function () {
+   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+      $('header').removeClass('nav-up').addClass('nav-down');
+   }
+});
 
 // <----------------- End hide header ----------------->
