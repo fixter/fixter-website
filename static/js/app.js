@@ -173,23 +173,6 @@ window.setInterval(function(){
 	$("#scrollSkew").css('-webkit-transform', $change);
 }, 16);
 
-// function decayDelta(){
-//   if (currentDelta < .009){
-//   }
-//   else{
-//     currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
-//   	updateSkew();
-//     setTimeout(decayDelta(),16);
-//   }
-// }
-
-// Updates the skew value of the object with the decay rate.
-// function updateSkew(){
-// 	var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
-// 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
-// 	var $change = $changeSkew + ' ' + $changeTransform
-// 	$("#scrollSkew").css('-webkit-transform', $change);
-// }
 
 // <----------------- End scroll skew ----------------->
 
