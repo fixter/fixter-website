@@ -129,10 +129,10 @@ $(document).on('scroll', function(){
 
 // Global Variables
 var currentDelta = 0; // The global value for the previous delta
-var deltaLimit = 80; // Set the limit of the skew here
-var returnSpeed = 1.08; // Sets the speed of return
+var deltaLimit = 70; // Set the limit of the skew here
+var returnSpeed = 1.14; // Sets the speed of return
 
-// Calculates scroll speed
+// Calculates scroll speed and is triggered lower down at the same time as the header hide
 var checkScrollSpeed = (function(settings){
     settings = settings || {};
 	var lastPos, newPos, timer, delta,
@@ -165,24 +165,46 @@ var checkScrollSpeed = (function(settings){
 
 // This is the decay rate of the skew
 window.setInterval(function(){
-	currentDelta = (currentDelta/returnSpeed).toFixed(5); // "toFixed" rounds to 5 significant digits
-	updateSkew();
-}, 10);
-
-// Updates the skew value of the object with the decay rate.
-function updateSkew(){
-	var $changeSkew = 'skewY('+(currentDelta/20).toFixed(5)+'deg)';
+	currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+	// updateSkew();
+  var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
 	var $change = $changeSkew + ' ' + $changeTransform
-	$(".scrollSkew").css('transform', $change);
-}
+	$("#scrollSkew").css('-webkit-transform', $change);
+}, 16);
 
-// listen to "scroll" event to trigger effect
-window.onscroll = function(){
-  checkScrollSpeed();
-};
+// function decayDelta(){
+//   if (currentDelta < .009){
+//   }
+//   else{
+//     currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+//   	updateSkew();
+//     setTimeout(decayDelta(),16);
+//   }
+// }
+
+// Updates the skew value of the object with the decay rate.
+// function updateSkew(){
+// 	var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
+// 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+// 	var $change = $changeSkew + ' ' + $changeTransform
+// 	$("#scrollSkew").css('-webkit-transform', $change);
+// }
 
 // <----------------- End scroll skew ----------------->
+
+
+// <----------------- Begin activation for scroll skew and hide header ----------------->
+
+$(window).scroll(function(event){
+    checkScrollSpeed();
+    didScroll = true;
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+       $('header').removeClass('nav-up').addClass('nav-down');
+    }
+});
+
+// <----------------- End activation for scroll skew and hide header ----------------->
 
 
 // <----------------- Begin hide header ----------------->
@@ -193,10 +215,6 @@ var lastScrollTop = 0;
 var deltaHeader = 5;
 var navbarHeight = $('header').outerHeight();
 console.log(navbarHeight);
-
-$(window).scroll(function(event){
-    didScroll = true;
-});
 
 setInterval(function() {
     if (didScroll) {
@@ -230,12 +248,5 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
-
-// Show when scrolled to bottom of page
-$(window).scroll(function () {
-   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-      $('header').removeClass('nav-up').addClass('nav-down');
-   }
-});
 
 // <----------------- End hide header ----------------->
