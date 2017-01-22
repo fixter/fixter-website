@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
   $('.scrollspy').scrollSpy({
-    scrollOffset: 0
+    scrollOffset: 45
   });
 });
 
@@ -127,87 +127,102 @@ $(document).on('scroll', function(){
 
 // <----------------- Begin scroll skew ----------------->
 
-// Global Variables
-var currentDelta = 0; // The global value for the previous delta
-var deltaLimit = 90; // Set the limit of the skew here
-var returnSpeed = 1.25; // Sets the speed of return
+// Since the scoll function doesn't work in Safari, it is disabled if in Safari
+function isNotSafari(){
+  var ua = navigator.userAgent.toLowerCase();
+  if (ua.indexOf('safari') != -1) {
+    if (ua.indexOf('chrome') > -1) {
+      return true // Chrome
+    } else {
+      return false // Safari
+    }
+  }
+}
 
-// Calculates scroll speed and is triggered lower down at the same time as the header hide
-var checkScrollSpeed = (function(settings){
-    settings = settings || {};
-	var lastPos, newPos, timer, delta,
-		delay = settings.delay || 20;
-	function clear() {
-		lastPos = null;
-		delta = 0;
-	}
-	clear();
-	return function(){
-		newPos = window.scrollY;
-		if ( lastPos != null ){ // && newPos < maxScroll
-			delta = newPos -  lastPos;
-		}
-		lastPos = newPos;
-		clearTimeout(timer);
-		timer = setTimeout(clear, delay);
-		updateRate(delta);
-		return delta;
-	};
-  // This function updates the rate with the highest absolute rate
-  // with respect to negative and positive values.
-  // The final result is modded by the limit to cap the max value.
-	function updateRate(deltaValue){
-		if (Math.abs(deltaValue) > Math.abs(currentDelta)){
-		  	currentDelta = (delta) % deltaLimit;
-		}
-	}
-})();
+if (isNotSafari()){
+  // Global Variables
+  var currentDelta = 0; // The global value for the previous delta
+  var deltaLimit = 90; // Set the limit of the skew here
+  var returnSpeed = 1.25; // Sets the speed of return
 
-// This is the decay rate of the skew
-// window.setInterval(function(){
-// 	currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
-// 	// updateSkew();
-//   var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
-// 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
-// 	var $change = $changeSkew + ' ' + $changeTransform
-// 	$("#scrollSkew").css('-webkit-transform', $change);
-// }, 16);
+  // Calculates scroll speed and is triggered lower down at the same time as the header hide
+  var checkScrollSpeed = (function(settings){
+      settings = settings || {};
+  	var lastPos, newPos, timer, delta,
+  		delay = settings.delay || 20;
+  	function clear() {
+  		lastPos = null;
+  		delta = 0;
+  	}
+  	clear();
+  	return function(){
+  		newPos = window.scrollY;
+  		if ( lastPos != null ){ // && newPos < maxScroll
+  			delta = newPos -  lastPos;
+  		}
+  		lastPos = newPos;
+  		clearTimeout(timer);
+  		timer = setTimeout(clear, delay);
+  		updateRate(delta);
+  		return delta;
+  	};
+    // This function updates the rate with the highest absolute rate
+    // with respect to negative and positive values.
+    // The final result is modded by the limit to cap the max value.
+  	function updateRate(deltaValue){
+  		if (Math.abs(deltaValue) > Math.abs(currentDelta)){
+  		  	currentDelta = (delta) % deltaLimit;
+  		}
+  	}
+  })();
 
-function interval(func, wait, times){
-    var interv = function(w, t){
-        return function(){
-            // if(typeof t === "undefined" || t-- > 0){
-                setTimeout(interv, w);
-                try{
-                    func.call(null);
-                }
-                catch(e){
-                    t = 0;
-                    throw e.toString();
-                }
-            // }
-        };
-    }(wait, times);
+  // This is the decay rate of the skew
+  // window.setInterval(function(){
+  // 	currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+  // 	// updateSkew();
+  //   var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
+  // 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+  // 	var $change = $changeSkew + ' ' + $changeTransform
+  // 	$("#scrollSkew").css('-webkit-transform', $change);
+  // }, 16);
 
-    setTimeout(interv, wait);
-};
-interval(function(){
-    currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
-    // updateSkew();
-    var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
-    var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
-    var $change = $changeSkew + ' ' + $changeTransform
-    $("#scrollSkew").css('-webkit-transform', $change);
-}, 16, 100000);
+  function interval(func, wait, times){
+      var interv = function(w, t){
+          return function(){
+              // if(typeof t === "undefined" || t-- > 0){
+                  setTimeout(interv, w);
+                  try{
+                      func.call(null);
+                  }
+                  catch(e){
+                      t = 0;
+                      throw e.toString();
+                  }
+              // }
+          };
+      }(wait, times);
 
+      setTimeout(interv, wait);
+  };
+  interval(function(){
+      currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+      // updateSkew();
+      var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
+      var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+      var $change = $changeSkew + ' ' + $changeTransform
+      $("#scrollSkew").css('-webkit-transform', $change);
+  }, 16, 100000);
 
+  $(window).scroll(function(event){
+      checkScrollSpeed();
+  });
+}
 // <----------------- End scroll skew ----------------->
 
 
 // <----------------- Begin activation for scroll skew and hide header ----------------->
 
 $(window).scroll(function(event){
-    checkScrollSpeed();
     didScroll = true;
     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
        $('header').removeClass('nav-up').addClass('nav-down');

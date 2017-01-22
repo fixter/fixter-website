@@ -55,6 +55,7 @@ h3{
 
 h1, h2, h4, h5{
   font-family: 'cooper_hewittheavy', sans-serif;
+  letter-spacing: .15rem;
 }
 
 .huge{
@@ -62,4 +63,15 @@ h1, h2, h4, h5{
   font-size: 9rem;
   letter-spacing: .4rem;
   margin: 0;
+}
+.full-height{
+  height: 100vh;
+  h1{
+    width: 100%;
+    text-align: center;
+  }
+}
+.full-width{
+  width: 100%;
+  padding: 0 10%;
 }
