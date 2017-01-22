@@ -129,8 +129,8 @@ $(document).on('scroll', function(){
 
 // Global Variables
 var currentDelta = 0; // The global value for the previous delta
-var deltaLimit = 70; // Set the limit of the skew here
-var returnSpeed = 1.14; // Sets the speed of return
+var deltaLimit = 90; // Set the limit of the skew here
+var returnSpeed = 1.25; // Sets the speed of return
 
 // Calculates scroll speed and is triggered lower down at the same time as the header hide
 var checkScrollSpeed = (function(settings){
@@ -164,14 +164,41 @@ var checkScrollSpeed = (function(settings){
 })();
 
 // This is the decay rate of the skew
-window.setInterval(function(){
-	currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
-	// updateSkew();
-  var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
-	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
-	var $change = $changeSkew + ' ' + $changeTransform
-	$("#scrollSkew").css('-webkit-transform', $change);
-}, 16);
+// window.setInterval(function(){
+// 	currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+// 	// updateSkew();
+//   var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
+// 	var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+// 	var $change = $changeSkew + ' ' + $changeTransform
+// 	$("#scrollSkew").css('-webkit-transform', $change);
+// }, 16);
+
+function interval(func, wait, times){
+    var interv = function(w, t){
+        return function(){
+            // if(typeof t === "undefined" || t-- > 0){
+                setTimeout(interv, w);
+                try{
+                    func.call(null);
+                }
+                catch(e){
+                    t = 0;
+                    throw e.toString();
+                }
+            // }
+        };
+    }(wait, times);
+
+    setTimeout(interv, wait);
+};
+interval(function(){
+    currentDelta = (currentDelta/returnSpeed).toFixed(3); // "toFixed" rounds to 5 significant digits
+    // updateSkew();
+    var $changeSkew = 'skewY('+(currentDelta/20).toFixed(3)+'deg)';
+    var $changeTransform = 'translateY('+ (currentDelta*2) +'px)';
+    var $change = $changeSkew + ' ' + $changeTransform
+    $("#scrollSkew").css('-webkit-transform', $change);
+}, 16, 100000);
 
 
 // <----------------- End scroll skew ----------------->
@@ -197,7 +224,7 @@ var didScroll;
 var lastScrollTop = 0;
 var deltaHeader = 5;
 var navbarHeight = $('header').outerHeight();
-console.log(navbarHeight);
+//console.log(navbarHeight);
 
 setInterval(function() {
     if (didScroll) {
